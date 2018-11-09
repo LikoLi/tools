@@ -7,12 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/time")
 public class Time {
-
     @RequestMapping("/todate")
     public String timestampToDate(Long timestamp) {
-        System.out.println("hello");
         String result;
         if (timestamp == null) {
             result = "timestamp不能为空";
@@ -22,5 +19,4 @@ public class Time {
         }
         return result;
     }
-
 }
