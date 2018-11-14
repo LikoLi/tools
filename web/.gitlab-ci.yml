@@ -1,0 +1,23 @@
+stages:
+    - build_package
+    - deploy
+
+build_package:
+  stage: build_package
+  script:
+    - ./build.sh $CI_BUILD_REF_NAME $CI_PROJECT_DIR
+    - ./build.sh $CI_BUILD_REF_NAME ${CI_PROJECT_DIR}-query
+  only:
+    - master
+    - /^\d+\.\d+$/
+    - tags
+
+deploy:
+  stage: deploy
+  script:
+    - /deploy/tool/deploy.sh $CI_BUILD_REF_NAME $CI_PROJECT_DIR
+    - /deploy/tool/deploy.sh $CI_BUILD_REF_NAME ${CI_PROJECT_DIR}-query
+  only:
+    - master
+    - /^\d+\.\d+$/
+
